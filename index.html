@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TECHNOVA 2026 | Electronics Club</title>
+<meta name="description" content="TECHNOVA 2026, the annual technical fest of the Electronics Club. Explore events and register.">
+<style>
+:root{
+  --bg:#0b1220;--bg2:#101a2e;--card:#142038;--line:#243656;
+  --text:#e8eef9;--muted:#9fb0cc;--accent:#2de2c0;--accent2:#5b8cff;--danger:#ff6b81;--ok:#3ddc97;
+  --radius:14px;--shadow:0 10px 30px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+a{color:var(--accent)}
+img,svg{max-width:100%}
+.container{width:min(1120px,92%);margin-inline:auto}
+.narrow{width:min(760px,92%)}
+code{background:#0b1426;padding:2px 6px;border-radius:6px;color:var(--accent)}
+
+/* header */
+.site-header{position:sticky;top:0;z-index:50;background:rgba(11,18,32,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;min-height:62px;position:relative}
+.brand{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none;font-weight:700;letter-spacing:.5px}
+.brand b{color:var(--accent)}
+.logo{width:34px;height:34px;color:var(--accent)}
+.nav-links{display:flex;gap:4px;list-style:none;margin:0;padding:0}
+.nav-links a{display:block;padding:8px 12px;border-radius:8px;color:var(--muted);text-decoration:none;font-size:.93rem}
+.nav-links a:hover,.nav-links a:focus-visible{color:var(--text);background:var(--card)}
+.nav-links .nav-org{border:1px solid var(--line)}
+.menu-btn{display:none;background:none;border:1px solid var(--line);color:var(--text);font-size:1.3rem;padding:4px 12px;border-radius:8px;cursor:pointer}
+
+/* hero */
+.hero{padding:clamp(48px,10vw,110px) 0;text-align:center;background:
+  radial-gradient(circle at 20% 10%,rgba(45,226,192,.14),transparent 45%),
+  radial-gradient(circle at 85% 30%,rgba(91,140,255,.16),transparent 45%),
+  repeating-linear-gradient(0deg,transparent 0 39px,rgba(255,255,255,.025) 39px 40px),
+  repeating-linear-gradient(90deg,transparent 0 39px,rgba(255,255,255,.025) 39px 40px),var(--bg)}
+.eyebrow{text-transform:uppercase;letter-spacing:.2em;color:var(--accent);font-size:.82rem;margin:0}
+h1{font-size:clamp(2.4rem,8vw,5rem);margin:.2em 0;line-height:1.05;letter-spacing:1px}
+.accent{color:var(--accent)}
+.tagline{font-size:clamp(1.05rem,2.6vw,1.4rem);color:var(--muted);margin:0 0 20px}
+.hero-meta{list-style:none;padding:0;margin:0 0 28px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:center;color:var(--text)}
+.countdown{display:flex;gap:clamp(8px,2vw,18px);justify-content:center;margin-bottom:8px}
+.countdown div{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 0;width:clamp(64px,18vw,100px);box-shadow:var(--shadow)}
+.countdown span{display:block;font-size:clamp(1.5rem,6vw,2.6rem);font-weight:800;color:var(--accent);font-variant-numeric:tabular-nums}
+.countdown small{color:var(--muted);text-transform:uppercase;font-size:.7rem;letter-spacing:.1em}
+.cd-note{color:var(--muted);min-height:1.5em;margin:6px 0 20px}
+.hero-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+/* buttons */
+.btn{display:inline-block;border:1px solid transparent;border-radius:10px;padding:10px 20px;font:inherit;font-weight:600;cursor:pointer;text-decoration:none;transition:transform .12s,background .2s}
+.btn:hover{transform:translateY(-1px)}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btn-primary{background:var(--accent);color:#04161a}
+.btn-primary:hover{background:#5df0d3}
+.btn-ghost{background:transparent;color:var(--text);border-color:var(--line)}
+.btn-ghost:hover{background:var(--card)}
+.btn-lg{padding:13px 28px;font-size:1.05rem}
+.btn-sm{padding:6px 12px;font-size:.85rem}
+:focus-visible{outline:2px solid var(--accent2);outline-offset:2px}
+
+/* sections */
+.section{padding:clamp(40px,7vw,80px) 0}
+.section.alt{background:var(--bg2)}
+h2{font-size:clamp(1.6rem,4vw,2.3rem);margin:0 0 6px}
+h2::after{content:"";display:block;width:56px;height:4px;background:var(--accent);border-radius:4px;margin-top:8px}
+.section-sub{color:var(--muted);margin:10px 0 28px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+
+/* events */
+.event{display:flex;flex-direction:column;gap:10px}
+.event .icon{font-size:2rem}
+.event h3{margin:0}
+.event p{margin:0;color:var(--muted)}
+.badges{display:flex;flex-wrap:wrap;gap:6px}
+.badge{font-size:.75rem;padding:3px 10px;border-radius:99px;background:#0d2a3a;color:var(--accent);border:1px solid #1d4b5c}
+.badge.warn{background:#3a1d28;color:#ff9fb0;border-color:#5c2a3a}
+.event details{border-top:1px solid var(--line);padding-top:8px}
+.event summary{cursor:pointer;color:var(--accent2);font-weight:600}
+.event ul{margin:8px 0 0;padding-left:20px;color:var(--muted)}
+.event .btn{margin-top:auto}
+
+/* schedule */
+.schedule-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.day h3{margin-top:0;color:var(--accent)}
+.slot{display:grid;grid-template-columns:96px 1fr;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
+.slot time{color:var(--accent2);font-weight:600;font-size:.9rem}
+.slot small{display:block;color:var(--muted)}
+
+/* forms */
+.form{display:flex;flex-direction:column;gap:16px}
+.form.inline{flex-direction:row;align-items:flex-end}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field{display:flex;flex-direction:column;gap:6px;border:0;padding:0;margin:0;min-width:0}
+.field.grow{flex:1}
+label,legend{font-weight:600;font-size:.92rem}
+input,select{width:100%;background:#0b1426;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:11px 12px;font:inherit}
+input::placeholder{color:#60739a}
+input:focus,select:focus{outline:2px solid var(--accent2);border-color:transparent}
+.invalid{border-color:var(--danger)!important}
+.valid{border-color:var(--ok)}
+.error{color:var(--danger);font-size:.84rem;min-height:0}
+.hint{color:var(--muted);font-size:.85rem;margin:0}
+.ptype{flex-direction:row;flex-wrap:wrap;align-items:center;gap:6px 22px}
+.ptype legend{padding:0;margin-bottom:6px;width:100%}
+.radio{display:flex;align-items:center;gap:8px;font-weight:500;cursor:pointer}
+.radio input{width:auto}
+.radio.disabled{opacity:.45;cursor:not-allowed}
+.team-box{border:1px dashed var(--line);border-radius:var(--radius);padding:16px;display:flex;flex-direction:column;gap:12px}
+.member{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:start;padding:10px;background:#0f1a31;border-radius:10px}
+.member .field{gap:4px}
+.member .rm{align-self:center}
+.narrow-card{max-width:420px}
+
+/* results */
+.results{display:grid;gap:14px;margin-top:20px}
+.reg-card h3{margin:0 0 6px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.kv{display:grid;grid-template-columns:130px 1fr;gap:4px 12px;margin:0}
+.kv dt{color:var(--muted)}
+.kv dd{margin:0;word-break:break-word}
+.empty{color:var(--muted);text-align:center;padding:18px}
+
+/* faq */
+.faq details{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;padding:14px 18px}
+.faq summary{cursor:pointer;font-weight:600}
+.faq p{margin:10px 0 0;color:var(--muted)}
+.contact-grid h3{margin-top:0}
+.contact-grid p{margin:4px 0;color:var(--muted);word-break:break-word}
+
+/* organiser */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px}
+.stat b{display:block;font-size:1.8rem;color:var(--accent)}
+.stat span{color:var(--muted);font-size:.85rem}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:8px}
+.toolbar input{flex:1 1 220px;width:auto}
+.toolbar select{flex:0 1 200px;width:auto}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--card)}
+table{width:100%;border-collapse:collapse;min-width:880px;font-size:.9rem}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+th{background:#0f1a31;color:var(--muted);font-weight:600;position:sticky;top:0}
+tbody tr:hover{background:#18284a}
+
+/* dialog */
+dialog{border:1px solid var(--line);border-radius:18px;background:var(--card);color:var(--text);padding:0;width:min(440px,92vw)}
+dialog::backdrop{background:rgba(0,0,0,.65)}
+.dialog-body{padding:28px;text-align:center}
+.tick{width:64px;height:64px;border-radius:50%;background:var(--ok);color:#04161a;font-size:2rem;font-weight:800;display:grid;place-items:center;margin:0 auto 12px}
+.idbox{display:flex;gap:10px;justify-content:center;align-items:center;margin:14px 0;flex-wrap:wrap}
+.idbox code{font-size:1.3rem;padding:8px 14px}
+
+.footer{border-top:1px solid var(--line);padding:22px 0;text-align:center;color:var(--muted);font-size:.9rem}
+
+/* tablet */
+@media (max-width:900px){
+  .menu-btn{display:block}
+  .nav-links{display:none;position:absolute;top:62px;left:0;right:0;flex-direction:column;background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:8px;box-shadow:var(--shadow)}
+  .nav-links.open{display:flex}
+}
+/* mobile */
+@media (max-width:640px){
+  .row{grid-template-columns:1fr}
+  .form.inline{flex-direction:column;align-items:stretch}
+  .member{grid-template-columns:1fr}
+  .member .rm{justify-self:end}
+  .slot{grid-template-columns:78px 1fr}
+  .kv{grid-template-columns:1fr}
+  .kv dt{margin-top:6px}
+  .toolbar select,.toolbar .btn{flex:1 1 100%}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav container" aria-label="Main">
+    <a href="#home" class="brand">
+      <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="2"/><path d="M6 20h9l3-8 4 16 3-8h9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>TECHNOVA <b>2026</b></span>
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#register">Register</a></li>
+      <li><a href="#my-registrations">My Registrations</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#organiser" class="nav-org">Organiser</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <!-- HOME -->
+  <section id="home" class="hero">
+    <div class="container hero-inner">
+      <p class="eyebrow">Electronics Club presents</p>
+      <h1>TECHNOVA <span class="accent">2026</span></h1>
+      <p class="tagline">Where circuits meet creativity.</p>
+      <ul class="hero-meta">
+        <li>📅 12–13 March 2027</li>
+        <li>📍 Main Auditorium &amp; ECE Block, Demo Institute of Technology</li>
+      </ul>
+      <div id="countdown" class="countdown" role="timer" aria-live="off">
+        <div><span id="cd-d">00</span><small>Days</small></div>
+        <div><span id="cd-h">00</span><small>Hours</small></div>
+        <div><span id="cd-m">00</span><small>Minutes</small></div>
+        <div><span id="cd-s">00</span><small>Seconds</small></div>
+      </div>
+      <p id="cd-note" class="cd-note"></p>
+      <div class="hero-cta">
+        <a href="#register" class="btn btn-primary btn-lg">Register Now</a>
+        <a href="#events" class="btn btn-ghost btn-lg">Explore Events</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENTS -->
+  <section id="events" class="section">
+    <div class="container">
+      <h2>Events</h2>
+      <p class="section-sub">Pick your arena. Click an event for rules and details.</p>
+      <div id="eventGrid" class="grid"></div>
+    </div>
+  </section>
+
+  <!-- SCHEDULE -->
+  <section id="schedule" class="section alt">
+    <div class="container">
+      <h2>Event Schedule</h2>
+      <p class="section-sub">Timings are tentative and may be updated.</p>
+      <div class="schedule-grid" id="scheduleGrid"></div>
+    </div>
+  </section>
+
+  <!-- REGISTER -->
+  <section id="register" class="section">
+    <div class="container narrow">
+      <h2>Register</h2>
+      <p class="section-sub">One registration per event. Team events need one registration from the team leader.</p>
+      <form id="regForm" class="card form" novalidate>
+        <div class="row">
+          <div class="field">
+            <label for="name">Full name</label>
+            <input id="name" name="name" type="text" autocomplete="name" placeholder="e.g. Aarav Sharma">
+            <span class="error" id="err-name"></span>
+          </div>
+          <div class="field">
+            <label for="email">College email</label>
+            <input id="email" name="email" type="email" autocomplete="email" placeholder="you@college.ac.in">
+            <span class="error" id="err-email"></span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="phone">Contact number</label>
+            <input id="phone" name="phone" type="tel" inputmode="numeric" maxlength="10" autocomplete="tel" placeholder="10-digit mobile number">
+            <span class="error" id="err-phone"></span>
+          </div>
+          <div class="field">
+            <label for="dept">Department</label>
+            <select id="dept" name="dept">
+              <option value="">Select department</option>
+              <option>Electronics &amp; Communication</option>
+              <option>Electrical</option>
+              <option>Computer Science</option>
+              <option>Information Technology</option>
+              <option>Mechanical</option>
+              <option>Civil</option>
+              <option>Other</option>
+            </select>
+            <span class="error" id="err-dept"></span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="year">Year</label>
+            <select id="year" name="year">
+              <option value="">Select year</option>
+              <option>1st Year</option>
+              <option>2nd Year</option>
+              <option>3rd Year</option>
+              <option>4th Year</option>
+              <option>Postgraduate</option>
+            </select>
+            <span class="error" id="err-year"></span>
+          </div>
+          <div class="field">
+            <label for="eventId">Event</label>
+            <select id="eventId" name="eventId"></select>
+            <span class="hint" id="eventHint"></span>
+            <span class="error" id="err-eventId"></span>
+          </div>
+        </div>
+
+        <fieldset class="field ptype">
+          <legend>Participation type</legend>
+          <label class="radio"><input type="radio" name="ptype" value="individual" checked> Individual</label>
+          <label class="radio"><input type="radio" name="ptype" value="team"> Team</label>
+          <span class="error" id="err-ptype"></span>
+        </fieldset>
+
+        <div id="teamBox" class="team-box" hidden>
+          <div class="field">
+            <label for="teamName">Team name</label>
+            <input id="teamName" name="teamName" type="text" placeholder="e.g. Volt Vikings">
+            <span class="error" id="err-teamName"></span>
+          </div>
+          <p class="hint" id="teamHint"></p>
+          <div id="members"></div>
+          <span class="error" id="err-members"></span>
+          <button type="button" class="btn btn-ghost" id="addMember">+ Add team member</button>
+        </div>
+
+        <p class="error" id="formError" role="alert"></p>
+        <button type="submit" class="btn btn-primary btn-lg">Submit Registration</button>
+        <p class="hint" id="formNote">Demo site: data is stored only in this browser. Use dummy details.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- MY REGISTRATIONS -->
+  <section id="my-registrations" class="section alt">
+    <div class="container narrow">
+      <h2>My Registrations</h2>
+      <p class="section-sub">Look up your registrations with your college email or registration ID.</p>
+      <form id="lookupForm" class="card form inline" novalidate>
+        <div class="field grow">
+          <label for="lookup">Email or registration ID</label>
+          <input id="lookup" type="text" placeholder="you@college.ac.in or TN26-XXXXXX" autocomplete="off">
+          <span class="error" id="err-lookup"></span>
+        </div>
+        <button class="btn btn-primary" type="submit">Find</button>
+      </form>
+      <div id="lookupResults" class="results" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="section">
+    <div class="container narrow">
+      <h2>FAQ</h2>
+      <div class="faq">
+        <details><summary>Who can participate?</summary><p>Any student with a valid college email ID. Students from all departments and colleges are welcome.</p></details>
+        <details><summary>Is there a registration fee?</summary><p>No. Registration for all events is free (dummy information for this demo).</p></details>
+        <details><summary>Can I register for more than one event?</summary><p>Yes, as long as the event timings do not clash. You need a separate registration for each event.</p></details>
+        <details><summary>How big can a team be?</summary><p>It depends on the event. The maximum team size is listed on every event card.</p></details>
+        <details><summary>I lost my registration ID. What now?</summary><p>Use the My Registrations section and search with your college email.</p></details>
+        <details><summary>Can I change my details after registering?</summary><p>Contact the organisers using the details below and quote your registration ID.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section alt">
+    <div class="container">
+      <h2>Contact</h2>
+      <div class="grid contact-grid">
+        <div class="card"><h3>Event Coordinator</h3><p>Riya Verma</p><p><a href="tel:+910000000001">+91 00000 00001</a></p></div>
+        <div class="card"><h3>Registration Desk</h3><p>Kabir Mehta</p><p><a href="tel:+910000000002">+91 00000 00002</a></p></div>
+        <div class="card"><h3>Email</h3><p><a href="mailto:technova@electronicsclub.example">technova@electronicsclub.example</a></p></div>
+        <div class="card"><h3>Venue</h3><p>Electronics Club Room, ECE Block, Demo Institute of Technology</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORGANISER -->
+  <section id="organiser" class="section">
+    <div class="container">
+      <h2>Organiser View</h2>
+      <div id="orgLock" class="card form narrow-card">
+        <form id="orgForm" novalidate>
+          <div class="field">
+            <label for="orgPass">Organiser passcode</label>
+            <input id="orgPass" type="password" autocomplete="off" placeholder="Enter passcode">
+            <span class="hint" id="orgHint"></span>
+            <span class="error" id="err-orgPass"></span>
+          </div>
+          <button class="btn btn-primary" type="submit">Unlock</button>
+        </form>
+      </div>
+
+      <div id="orgPanel" hidden>
+        <div class="stats" id="stats"></div>
+        <div class="toolbar">
+          <input id="orgSearch" type="search" placeholder="Search name, email, ID, team…" aria-label="Search registrations">
+          <select id="orgFilter" aria-label="Filter by event"></select>
+          <button class="btn btn-ghost" id="refreshBtn" type="button">Refresh</button>
+          <button class="btn btn-primary" id="csvBtn" type="button">Export CSV</button>
+          <button class="btn btn-ghost" id="resetBtn" type="button">Reset demo data</button>
+          <button class="btn btn-ghost" id="lockBtn" type="button">Lock</button>
+        </div>
+        <p id="orgCount" class="hint"></p>
+        <div class="table-wrap">
+          <table id="orgTable">
+            <thead>
+              <tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Dept / Year</th><th>Event</th><th>Type</th><th>Team</th><th>Registered</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <p>© 2026 Electronics Club · TECHNOVA 2026 · Demo project with dummy data</p>
+  </div>
+</footer>
+
+<dialog id="successDialog" aria-labelledby="succTitle">
+  <div class="dialog-body">
+    <div class="tick" aria-hidden="true">✓</div>
+    <h3 id="succTitle">Registration successful!</h3>
+    <p id="succText"></p>
+    <div class="idbox"><code id="succId"></code><button class="btn btn-ghost" id="copyId" type="button">Copy</button></div>
+    <p class="hint">Save this ID. You can look up your registration anytime in My Registrations.</p>
+    <button class="btn btn-primary" id="closeDialog" type="button">Done</button>
+  </div>
+</dialog>
+
+<script>
+(function () {
+  'use strict';
+
+  /* Visible error banner so failures are never silent */
+  function showBanner(msg) {
+    let b = document.getElementById('errBanner');
+    if (!b) {
+      b = document.createElement('div');
+      b.id = 'errBanner';
+      b.setAttribute('role', 'alert');
+      b.style.cssText = 'position:fixed;left:0;right:0;bottom:0;z-index:999;background:#ff6b81;color:#1a0006;padding:10px 16px;font:600 14px system-ui;text-align:center';
+      document.body.appendChild(b);
+    }
+    b.textContent = 'Problem: ' + msg + ' (take a screenshot and send it to your helper)';
+  }
+  window.addEventListener('error', (ev) => showBanner(ev.message || 'script error'));
+  window.addEventListener('unhandledrejection', (ev) => showBanner((ev.reason && ev.reason.message) || 'request failed'));
+  if (location.protocol !== 'file:' && location.protocol !== 'http:' && location.protocol !== 'https:') showBanner('open this file directly in Chrome or Brave from your Downloads folder');
+
+  /* ---------- Config & dummy data ---------- */
+  const FEST_START = new Date('2027-03-12T09:00:00+05:30');
+  const FEST_END = new Date('2027-03-13T18:00:00+05:30');
+  const STORE_KEY = 'technova2026.registrations';
+  const SEED_KEY = 'technova2026.seeded';
+  // Paste your Google Apps Script Web App URL here (ends with /exec).
+  // Leave empty to run in local demo mode (data stays in this browser only).
+  const API_URL = 'https://script.google.com/macros/s/AKfycbz2z3f1zfF8M-E8ejteFnhTIMmRr0ao3liV8bKEur1qSA-5fIbyRYFbR2se8DPjwT0mwA/exec';
+  const REMOTE = !!API_URL;
+  const ORG_PASS = 'technova2026'; // local demo mode only
+
+  const EVENTS = [
+    {
+      id: 'robo-wars', name: 'Robo Wars', icon: '🤖', type: 'team', minTeam: 2, maxTeam: 4,
+      deadline: '2027-03-05T23:59:00+05:30',
+      description: 'Build a combat robot and battle it out in the arena. Strategy, strength and control decide the winner.',
+      rules: [
+        'Robot weight must not exceed 8 kg.',
+        'Wired or wireless control is allowed; no projectiles or flammable liquids.',
+        'Matches are 3 minutes, knockout format.',
+        'Judges can disqualify unsafe robots.'
+      ]
+    },
+    {
+      id: 'code-clash', name: 'Code Clash', icon: '💻', type: 'individual', minTeam: 1, maxTeam: 1,
+      deadline: '2027-03-08T23:59:00+05:30',
+      description: 'A timed competitive programming contest with logic puzzles and algorithm problems.',
+      rules: [
+        'Individual participation only.',
+        'Languages allowed: C, C++, Java and Python.',
+        'Internet access and AI tools are not allowed during the contest.',
+        'Ties are broken by total time taken.'
+      ]
+    },
+    {
+      id: 'circuitrix', name: 'Circuitrix', icon: '🔌', type: 'team', minTeam: 2, maxTeam: 3,
+      deadline: '2027-03-06T23:59:00+05:30',
+      description: 'Design, debug and build circuits against the clock. Test your analog and digital fundamentals.',
+      rules: [
+        'Teams of 2 to 3 members.',
+        'Components and breadboards are provided by the club.',
+        'Round 1 is a written screening; Round 2 is hands-on building.',
+        'The judges decision is final.'
+      ]
+    },
+    {
+      id: 'tech-quiz', name: 'Tech Quiz', icon: '🧠', type: 'both', minTeam: 2, maxTeam: 3,
+      deadline: '2027-03-10T23:59:00+05:30',
+      description: 'A rapid-fire quiz on electronics, computing, gadgets and technology history.',
+      rules: [
+        'Participate alone or in a team of up to 3.',
+        'Prelims are written; the top 6 move to the final stage.',
+        'No electronic devices during the quiz.',
+        'Negative marking applies in the prelims.'
+      ]
+    },
+    {
+      id: 'embedded-sprint', name: 'Embedded Sprint', icon: '⚡', type: 'individual', minTeam: 1, maxTeam: 1,
+      deadline: '2027-03-09T23:59:00+05:30',
+      description: 'Program a microcontroller to solve a surprise problem statement in 90 minutes.',
+      rules: [
+        'Individual participation only.',
+        'Boards and sensors are provided; bring your own laptop.',
+        'Problem statement is revealed at the start of the round.',
+        'Judged on working demo, code clarity and speed.'
+      ]
+    }
+  ];
+
+  const SCHEDULE = [
+    {
+      day: 'Day 1 · 12 March 2027', slots: [
+        ['09:00', 'Inauguration', 'Main Auditorium'],
+        ['10:30', 'Code Clash', 'Computer Lab 1'],
+        ['11:00', 'Circuitrix: Round 1', 'ECE Block, Room 204'],
+        ['14:00', 'Embedded Sprint', 'Embedded Systems Lab'],
+        ['16:00', 'Circuitrix: Round 2', 'ECE Block, Room 204']
+      ]
+    },
+    {
+      day: 'Day 2 · 13 March 2027', slots: [
+        ['09:30', 'Robo Wars: Qualifiers', 'Open Arena'],
+        ['12:00', 'Tech Quiz: Prelims', 'Seminar Hall'],
+        ['14:30', 'Robo Wars: Finals', 'Open Arena'],
+        ['16:00', 'Tech Quiz: Finals', 'Main Auditorium'],
+        ['17:15', 'Prize Distribution', 'Main Auditorium']
+      ]
+    }
+  ];
+
+  const SEED = [
+    ['Aarav Sharma', 'aarav.sharma@nitdemo.ac.in', '9876500001', 'Electronics & Communication', '3rd Year', 'code-clash', 'individual', '', []],
+    ['Meera Iyer', 'meera.iyer@nitdemo.ac.in', '9876500002', 'Computer Science', '2nd Year', 'robo-wars', 'team', 'Volt Vikings', [['Rohan Das', 'rohan.das@nitdemo.ac.in'], ['Sana Khan', 'sana.khan@nitdemo.ac.in']]],
+    ['Kabir Singh', 'kabir.singh@nitdemo.ac.in', '9876500003', 'Electrical', '4th Year', 'circuitrix', 'team', 'Ohm Sweet Ohm', [['Tanvi Rao', 'tanvi.rao@nitdemo.ac.in']]],
+    ['Diya Patel', 'diya.patel@nitdemo.ac.in', '9876500004', 'Information Technology', '1st Year', 'tech-quiz', 'individual', '', []],
+    ['Ishaan Gupta', 'ishaan.gupta@nitdemo.ac.in', '9876500005', 'Electronics & Communication', '2nd Year', 'embedded-sprint', 'individual', '', []],
+    ['Nisha Reddy', 'nisha.reddy@nitdemo.ac.in', '9876500006', 'Mechanical', '3rd Year', 'tech-quiz', 'team', 'Quiz Circuit', [['Arjun Nair', 'arjun.nair@nitdemo.ac.in'], ['Pooja Menon', 'pooja.menon@nitdemo.ac.in']]]
+  ];
+
+  /* ---------- Helpers ---------- */
+  const $ = (s, r) => (r || document).querySelector(s);
+  const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
+  const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const getEvent = (id) => EVENTS.find((e) => e.id === id);
+  const fmtDate = (iso) => new Date(iso).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+  const fmtDateTime = (iso) => new Date(iso).toLocaleString('en-IN', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+  const isClosed = (ev) => Date.now() > new Date(ev.deadline).getTime();
+  const typeLabel = (ev) => ev.type === 'both' ? 'Individual or Team' : ev.type === 'team' ? 'Team' : 'Individual';
+
+  /* Server API (Google Apps Script) */
+  // Retries up to 3 times on network failures (Apps Script occasionally drops a request).
+  // Safe for registration: the server rejects duplicates, so a retry can never create a second row.
+  async function withRetry(fn) {
+    let lastErr;
+    for (let i = 0; i < 3; i++) {
+      try { return await fn(); } catch (err) {
+        lastErr = err;
+        await new Promise((res) => setTimeout(res, 700 * (i + 1)));
+      }
+    }
+    throw lastErr;
+  }
+  function timedFetch(url, opts) {
+    const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), 25000);
+    return fetch(url, Object.assign({}, opts, { signal: ctl.signal })).then((r) => r.json()).finally(() => clearTimeout(t));
+  }
+  function apiGet(params) {
+    return withRetry(() => timedFetch(API_URL + '?' + new URLSearchParams(params).toString(), {}));
+  }
+  function apiPost(body) {
+    // text/plain avoids a CORS preflight, which Apps Script does not support
+    return withRetry(() => timedFetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) }));
+  }
+
+  /* Storage with in-memory fallback (local demo mode) */
+  let memory = { regs: [], seeded: false };
+  function readRegs() {
+    try { return JSON.parse(localStorage.getItem(STORE_KEY)) || []; } catch (e) { return memory.regs; }
+  }
+  function writeRegs(list) {
+    memory.regs = list;
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(list)); } catch (e) { /* ignore */ }
+  }
+  function genId(list) {
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    let id;
+    do {
+      id = 'TN26-';
+      for (let i = 0; i < 6; i++) id += chars[Math.floor(Math.random() * chars.length)];
+    } while (list.some((r) => r.id === id));
+    return id;
+  }
+  function seedIfNeeded() {
+    if (REMOTE) return;
+    let seeded = false;
+    try { seeded = localStorage.getItem(SEED_KEY) === '1'; } catch (e) { seeded = memory.seeded; }
+    if (seeded) return;
+    const list = [];
+    SEED.forEach((s, i) => {
+      list.push({
+        id: genId(list), name: s[0], email: s[1], phone: s[2], dept: s[3], year: s[4],
+        eventId: s[5], ptype: s[6], teamName: s[7], members: s[8].map((m) => ({ name: m[0], email: m[1] })),
+        createdAt: new Date(Date.now() - (SEED.length - i) * 3600 * 1000 * 5).toISOString()
+      });
+    });
+    writeRegs(list);
+    memory.seeded = true;
+    try { localStorage.setItem(SEED_KEY, '1'); } catch (e) { /* ignore */ }
+  }
+
+  /* ---------- Nav ---------- */
+  const menuBtn = $('#menuBtn');
+  const navLinks = $('#navLinks');
+  menuBtn.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', String(open));
+  });
+  navLinks.addEventListener('click', (e) => {
+    if (e.target.tagName === 'A') { navLinks.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); }
+  });
+
+  /* ---------- Countdown ---------- */
+  function tick() {
+    const now = Date.now();
+    const diff = FEST_START.getTime() - now;
+    const note = $('#cd-note');
+    if (diff <= 0) {
+      ['d', 'h', 'm', 's'].forEach((k) => { $('#cd-' + k).textContent = '00'; });
+      note.textContent = now < FEST_END.getTime() ? 'TECHNOVA 2026 is live now!' : 'TECHNOVA 2026 has ended. See you next year!';
+      return;
+    }
+    const s = Math.floor(diff / 1000);
+    const pad = (n) => String(n).padStart(2, '0');
+    $('#cd-d').textContent = pad(Math.floor(s / 86400));
+    $('#cd-h').textContent = pad(Math.floor((s % 86400) / 3600));
+    $('#cd-m').textContent = pad(Math.floor((s % 3600) / 60));
+    $('#cd-s').textContent = pad(s % 60);
+    note.textContent = 'Until the fest begins';
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  /* ---------- Events ---------- */
+  function renderEvents() {
+    $('#eventGrid').innerHTML = EVENTS.map((ev) => {
+      const closed = isClosed(ev);
+      const size = ev.maxTeam > 1 ? 'Max team size: ' + ev.maxTeam : 'Solo event';
+      return '<article class="card event">' +
+        '<div class="icon" aria-hidden="true">' + ev.icon + '</div>' +
+        '<h3>' + esc(ev.name) + '</h3>' +
+        '<p>' + esc(ev.description) + '</p>' +
+        '<div class="badges">' +
+        '<span class="badge">' + esc(typeLabel(ev)) + '</span>' +
+        '<span class="badge">' + esc(size) + '</span>' +
+        '<span class="badge ' + (closed ? 'warn' : '') + '">' + (closed ? 'Registration closed' : 'Deadline: ' + esc(fmtDate(ev.deadline))) + '</span>' +
+        '</div>' +
+        '<details><summary>Rules</summary><ul>' + ev.rules.map((r) => '<li>' + esc(r) + '</li>').join('') + '</ul></details>' +
+        '<button class="btn btn-primary" data-reg="' + esc(ev.id) + '"' + (closed ? ' disabled' : '') + '>' + (closed ? 'Closed' : 'Register') + '</button>' +
+        '</article>';
+    }).join('');
+  }
+  $('#eventGrid').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-reg]');
+    if (!b) return;
+    eventSelect.value = b.dataset.reg;
+    onEventChange();
+    $('#register').scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => $('#name').focus({ preventScroll: true }), 500);
+  });
+
+  function renderSchedule() {
+    $('#scheduleGrid').innerHTML = SCHEDULE.map((d) =>
+      '<div class="card day"><h3>' + esc(d.day) + '</h3>' +
+      d.slots.map((s) => '<div class="slot"><time>' + esc(s[0]) + '</time><div>' + esc(s[1]) + '<small>' + esc(s[2]) + '</small></div></div>').join('') +
+      '</div>').join('');
+  }
+
+  /* ---------- Registration form ---------- */
+  const form = $('#regForm');
+  const eventSelect = $('#eventId');
+  const teamBox = $('#teamBox');
+  const membersBox = $('#members');
+  const ptypeRadios = $$('input[name="ptype"]');
+
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.(edu|edu\.[a-z]{2}|ac\.[a-z]{2})$/i;
+  const PHONE_RE = /^[6-9]\d{9}$/;
+  const NAME_RE = /^[A-Za-z][A-Za-z .'-]{1,59}$/;
+
+  function buildEventOptions() {
+    eventSelect.innerHTML = '<option value="">Select event</option>' + EVENTS.map((ev) =>
+      '<option value="' + esc(ev.id) + '"' + (isClosed(ev) ? ' disabled' : '') + '>' + esc(ev.name) + (isClosed(ev) ? ' (closed)' : '') + '</option>').join('');
+  }
+
+  function currentEvent() { return getEvent(eventSelect.value); }
+  function currentType() { return (ptypeRadios.find((r) => r.checked) || {}).value || 'individual'; }
+
+  function onEventChange() {
+    const ev = currentEvent();
+    const hint = $('#eventHint');
+    ptypeRadios.forEach((r) => { r.disabled = false; r.parentElement.classList.remove('disabled'); });
+    if (ev) {
+      hint.textContent = typeLabel(ev) + (ev.maxTeam > 1 ? ' · team of ' + ev.minTeam + '–' + ev.maxTeam : '') + ' · Deadline ' + fmtDateTime(ev.deadline);
+      if (ev.type !== 'both') {
+        ptypeRadios.forEach((r) => {
+          r.checked = r.value === ev.type;
+          if (r.value !== ev.type) { r.disabled = true; r.parentElement.classList.add('disabled'); }
+        });
+      }
+    } else { hint.textContent = ''; }
+    onTypeChange();
+    if (eventSelect.dataset.touched) validateField('eventId');
+  }
+
+  function maxExtraMembers() { const ev = currentEvent(); return ev ? Math.max(ev.maxTeam - 1, 0) : 0; }
+
+  function onTypeChange() {
+    const isTeam = currentType() === 'team';
+    teamBox.hidden = !isTeam;
+    if (isTeam) {
+      const ev = currentEvent();
+      $('#teamHint').textContent = ev
+        ? 'You are the team leader. Add ' + (ev.minTeam - 1) + ' to ' + (ev.maxTeam - 1) + ' more member(s).'
+        : 'Select an event first to see the team size limits.';
+      if (!membersBox.children.length) addMember();
+      while (membersBox.children.length > maxExtraMembers() && membersBox.children.length > 1) membersBox.lastElementChild.remove();
+    }
+    updateAddBtn();
+  }
+
+  function updateAddBtn() {
+    const btn = $('#addMember');
+    const max = maxExtraMembers();
+    btn.disabled = !currentEvent() || membersBox.children.length >= max;
+  }
+
+  let memberSeq = 0;
+  function addMember(data) {
+    if (membersBox.children.length >= maxExtraMembers() && currentEvent()) return;
+    const n = ++memberSeq;
+    const row = document.createElement('div');
+    row.className = 'member';
+    row.innerHTML =
+      '<div class="field"><label for="mn' + n + '">Member name</label><input id="mn' + n + '" data-m="name" type="text" placeholder="Full name"><span class="error"></span></div>' +
+      '<div class="field"><label for="me' + n + '">Member college email</label><input id="me' + n + '" data-m="email" type="email" placeholder="member@college.ac.in"><span class="error"></span></div>' +
+      '<button type="button" class="btn btn-ghost btn-sm rm" aria-label="Remove member">Remove</button>';
+    if (data) { $('[data-m=name]', row).value = data.name; $('[data-m=email]', row).value = data.email; }
+    membersBox.appendChild(row);
+    updateAddBtn();
+  }
+
+  $('#addMember').addEventListener('click', () => addMember());
+  membersBox.addEventListener('click', (e) => {
+    if (e.target.classList.contains('rm')) { e.target.closest('.member').remove(); updateAddBtn(); $('#err-members').textContent = ''; }
+  });
+  membersBox.addEventListener('input', (e) => { if (e.target.dataset.m) validateMembers(true); });
+  membersBox.addEventListener('blur', (e) => { if (e.target.dataset && e.target.dataset.m) validateMembers(false); }, true);
+
+  function setError(id, msg) {
+    const input = document.getElementById(id);
+    const err = document.getElementById('err-' + id);
+    if (err) err.textContent = msg || '';
+    if (input) {
+      input.classList.toggle('invalid', !!msg);
+      input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+    }
+    return !msg;
+  }
+
+  const validators = {
+    name: (v) => !v ? 'Please enter your name.' : !NAME_RE.test(v) ? 'Use letters only (2–60 characters).' : '',
+    email: (v) => !v ? 'Please enter your college email.' : !EMAIL_RE.test(v) ? 'Use a valid college email (ending in .edu, .edu.in or .ac.in).' : '',
+    phone: (v) => !v ? 'Please enter your contact number.' : !PHONE_RE.test(v) ? 'Enter a valid 10-digit mobile number starting with 6–9.' : '',
+    dept: (v) => v ? '' : 'Please select your department.',
+    year: (v) => v ? '' : 'Please select your year.',
+    eventId: (v) => !v ? 'Please select an event.' : (isClosed(getEvent(v)) ? 'Registration for this event is closed.' : ''),
+    teamName: (v) => currentType() !== 'team' ? '' : (!v ? 'Please enter a team name.' : v.length < 3 ? 'Team name must be at least 3 characters.' : v.length > 40 ? 'Team name is too long.' : '')
+  };
+
+  function validateField(id) {
+    const el = document.getElementById(id);
+    return setError(id, validators[id](el.value.trim()));
+  }
+
+  function validateMembers(soft) {
+    const err = $('#err-members');
+    err.textContent = '';
+    if (currentType() !== 'team') return true;
+    const ev = currentEvent();
+    const leader = $('#email').value.trim().toLowerCase();
+    const seen = new Set(leader ? [leader] : []);
+    let ok = true;
+    $$('.member', membersBox).forEach((row) => {
+      const n = $('[data-m=name]', row), m = $('[data-m=email]', row);
+      const ne = n.nextElementSibling, me = m.nextElementSibling;
+      const nv = n.value.trim(), mv = m.value.trim().toLowerCase();
+      let nm = '', mm = '';
+      if (!nv) nm = soft && !n.dataset.t ? '' : 'Enter member name.';
+      else if (!NAME_RE.test(nv)) nm = 'Use letters only.';
+      if (!mv) mm = soft && !m.dataset.t ? '' : 'Enter member email.';
+      else if (!EMAIL_RE.test(mv)) mm = 'Use a valid college email.';
+      else if (seen.has(mv)) mm = 'This email is used more than once in your team.';
+      if (mv) seen.add(mv);
+      if (!soft) { n.dataset.t = '1'; m.dataset.t = '1'; }
+      ne.textContent = nm; me.textContent = mm;
+      n.classList.toggle('invalid', !!nm); m.classList.toggle('invalid', !!mm);
+      if (nm || mm || !nv || !mv) ok = false;
+    });
+    const count = membersBox.children.length + 1;
+    if (ev && !soft && count < ev.minTeam) { err.textContent = 'This event needs at least ' + ev.minTeam + ' members including you.'; ok = false; }
+    return ok;
+  }
+
+  ['name', 'email', 'phone', 'dept', 'year', 'eventId', 'teamName'].forEach((id) => {
+    const el = document.getElementById(id);
+    el.addEventListener('blur', () => { el.dataset.touched = '1'; validateField(id); });
+    el.addEventListener('input', () => { if (el.dataset.touched || el.classList.contains('invalid')) validateField(id); if (id === 'email') validateMembers(true); });
+    el.addEventListener('change', () => { el.dataset.touched = '1'; validateField(id); });
+  });
+  $('#phone').addEventListener('input', (e) => { e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10); });
+  eventSelect.addEventListener('change', onEventChange);
+  ptypeRadios.forEach((r) => r.addEventListener('change', onTypeChange));
+
+  function allEmails(r) { return [r.email.toLowerCase()].concat((r.members || []).map((m) => m.email.toLowerCase())); }
+
+  function findDuplicate(candidate) {
+    const regs = readRegs().filter((r) => r.eventId === candidate.eventId);
+    const mine = allEmails(candidate);
+    for (const r of regs) {
+      const theirs = allEmails(r);
+      const clash = mine.find((m) => theirs.includes(m));
+      if (clash) return { email: clash, reg: r };
+    }
+    return null;
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const fields = ['name', 'email', 'phone', 'dept', 'year', 'eventId', 'teamName'];
+    let firstBad = null;
+    fields.forEach((id) => { if (!validateField(id) && !firstBad) firstBad = document.getElementById(id); });
+    if (!validateMembers(false) && !firstBad) firstBad = $('.member .invalid', membersBox) || $('#addMember');
+    if (firstBad) { firstBad.focus(); return; }
+
+    const ev = currentEvent();
+    const ptype = currentType();
+    const candidate = {
+      name: $('#name').value.trim(),
+      email: $('#email').value.trim().toLowerCase(),
+      phone: $('#phone').value.trim(),
+      dept: $('#dept').value, year: $('#year').value,
+      eventId: ev.id, ptype: ptype,
+      teamName: ptype === 'team' ? $('#teamName').value.trim() : '',
+      members: ptype === 'team' ? $$('.member', membersBox).map((row) => ({ name: $('[data-m=name]', row).value.trim(), email: $('[data-m=email]', row).value.trim().toLowerCase() })) : []
+    };
+
+    $('#formError').textContent = '';
+    if (REMOTE) {
+      const btn = $('button[type=submit]', form);
+      btn.disabled = true; btn.textContent = 'Submitting…';
+      let res;
+      try { res = await apiPost({ action: 'register', data: candidate }); }
+      catch (err) { res = { ok: false, error: 'network', message: 'Could not reach the server (' + (err && err.message ? err.message : 'unknown') + '). Check your internet and try again.' }; }
+      btn.disabled = false; btn.textContent = 'Submit Registration';
+      if (!res.ok) {
+        if (res.error === 'duplicate_leader') { setError('email', res.message); $('#email').focus(); }
+        else if (res.error === 'duplicate_member') { $('#err-members').textContent = res.message; }
+        else if (res.field && document.getElementById('err-' + res.field)) { setError(res.field, res.message); }
+        else { $('#formError').textContent = res.message || 'Something went wrong. Please try again.'; }
+        return;
+      }
+      candidate.id = res.id;
+      candidate.createdAt = res.createdAt;
+    } else {
+      const dup = findDuplicate(candidate);
+      if (dup) {
+        const msg = dup.email === candidate.email
+          ? 'You are already registered for ' + ev.name + ' (ID ' + dup.reg.id + ').'
+          : dup.email + ' is already registered for ' + ev.name + ' (ID ' + dup.reg.id + ').';
+        if (dup.email === candidate.email) { setError('email', msg); $('#email').focus(); }
+        else { $('#err-members').textContent = msg; $('#addMember').focus(); }
+        return;
+      }
+      const regs = readRegs();
+      candidate.id = genId(regs);
+      candidate.createdAt = new Date().toISOString();
+      regs.push(candidate);
+      writeRegs(regs);
+    }
+
+    $('#succText').textContent = 'You are registered for ' + ev.name + (ptype === 'team' ? ' with team "' + candidate.teamName + '"' : '') + '. See you at TECHNOVA 2026!';
+    $('#succId').textContent = candidate.id;
+    $('#successDialog').showModal();
+    resetForm();
+    renderOrganiser();
+  });
+
+  function resetForm() {
+    form.reset();
+    membersBox.innerHTML = '';
+    $$('.invalid', form).forEach((el) => el.classList.remove('invalid'));
+    $$('.error', form).forEach((el) => { el.textContent = ''; });
+    $$('[data-touched]', form).forEach((el) => delete el.dataset.touched);
+    onEventChange();
+  }
+
+  $('#closeDialog').addEventListener('click', () => $('#successDialog').close());
+  $('#copyId').addEventListener('click', () => {
+    const id = $('#succId').textContent;
+    const done = () => { $('#copyId').textContent = 'Copied!'; setTimeout(() => { $('#copyId').textContent = 'Copy'; }, 1500); };
+    if (navigator.clipboard) navigator.clipboard.writeText(id).then(done, () => {});
+  });
+
+  /* ---------- My Registrations ---------- */
+  function regCard(r) {
+    const ev = getEvent(r.eventId) || { name: r.eventId };
+    const rows = [
+      ['Name', r.name], ['Email', r.email], ['Contact', r.phone],
+      ['Department', r.dept], ['Year', r.year],
+      ['Participation', r.ptype === 'team' ? 'Team' : 'Individual']
+    ];
+    if (r.ptype === 'team') {
+      rows.push(['Team name', r.teamName]);
+      rows.push(['Members', [r.name + ' (leader)'].concat(r.members.map((m) => m.name + ' – ' + m.email)).join('; ')]);
+    }
+    rows.push(['Registered on', fmtDateTime(r.createdAt)]);
+    return '<article class="card reg-card"><h3><span>' + esc(ev.name) + '</span><code>' + esc(r.id) + '</code></h3><dl class="kv">' +
+      rows.map((x) => '<dt>' + esc(x[0]) + '</dt><dd>' + esc(x[1]) + '</dd>').join('') + '</dl></article>';
+  }
+
+  $('#lookupForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const q = $('#lookup').value.trim();
+    const out = $('#lookupResults');
+    if (!q) { setError('lookup', 'Enter your email or registration ID.'); out.innerHTML = ''; return; }
+    const isEmail = q.includes('@');
+    if (isEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(q)) { setError('lookup', 'That email address does not look valid.'); out.innerHTML = ''; return; }
+    if (!isEmail && !/^TN26-[A-Z0-9]{6}$/i.test(q)) { setError('lookup', 'Registration IDs look like TN26-ABC123.'); out.innerHTML = ''; return; }
+    setError('lookup', '');
+    const key = q.toLowerCase();
+    let found;
+    if (REMOTE) {
+      out.innerHTML = '<p class="hint">Searching…</p>';
+      try {
+        const res = await apiGet({ action: 'lookup', q: q });
+        if (!res.ok) throw new Error('bad');
+        found = res.items;
+      } catch (err) {
+        out.innerHTML = '<p class="empty card">Could not reach the server. Please try again.</p>';
+        return;
+      }
+    } else {
+      found = readRegs().filter((r) => isEmail ? allEmails(r).includes(key) : r.id.toLowerCase() === key);
+    }
+    out.innerHTML = found.length
+      ? '<p class="hint">' + found.length + ' registration(s) found.</p>' + found.map(regCard).join('')
+      : '<p class="empty card">No registration found for "' + esc(q) + '". Check the spelling or register above.</p>';
+  });
+
+  /* ---------- Organiser ---------- */
+  let unlocked = false;
+  let orgData = [];
+  let orgPassValue = '';
+  const orgFilter = $('#orgFilter');
+  orgFilter.innerHTML = '<option value="">All events</option>' + EVENTS.map((ev) => '<option value="' + esc(ev.id) + '">' + esc(ev.name) + '</option>').join('');
+
+  function filteredRegs() {
+    const q = $('#orgSearch').value.trim().toLowerCase();
+    const f = orgFilter.value;
+    return orgData.filter((r) => {
+      if (f && r.eventId !== f) return false;
+      if (!q) return true;
+      const ev = getEvent(r.eventId);
+      const hay = [r.id, r.name, r.email, r.phone, r.dept, r.year, r.teamName, ev ? ev.name : ''].concat(r.members.map((m) => m.name + ' ' + m.email)).join(' ').toLowerCase();
+      return hay.includes(q);
+    });
+  }
+
+  function renderOrganiser() {
+    if (!unlocked) return;
+    if (!REMOTE) orgData = readRegs();
+    const all = orgData;
+    const list = filteredRegs().sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+    const participants = all.reduce((n, r) => n + 1 + r.members.length, 0);
+    $('#stats').innerHTML =
+      '<div class="stat"><b>' + all.length + '</b><span>Total registrations</span></div>' +
+      '<div class="stat"><b>' + participants + '</b><span>Total participants</span></div>' +
+      EVENTS.map((ev) => '<div class="stat"><b>' + all.filter((r) => r.eventId === ev.id).length + '</b><span>' + esc(ev.name) + '</span></div>').join('');
+    $('#orgCount').textContent = 'Showing ' + list.length + ' of ' + all.length + ' registrations';
+    $('#orgTable tbody').innerHTML = list.length ? list.map((r) => {
+      const ev = getEvent(r.eventId);
+      return '<tr><td><code>' + esc(r.id) + '</code></td><td>' + esc(r.name) + '</td><td>' + esc(r.email) + '</td><td>' + esc(r.phone) + '</td><td>' + esc(r.dept) + ' / ' + esc(r.year) + '</td><td>' + esc(ev ? ev.name : r.eventId) + '</td><td>' + (r.ptype === 'team' ? 'Team' : 'Individual') + '</td><td>' + esc(r.ptype === 'team' ? r.teamName + ' (' + (r.members.length + 1) + ')' : '-') + '</td><td>' + esc(fmtDateTime(r.createdAt)) + '</td></tr>';
+    }).join('') : '<tr><td colspan="9" class="empty">No registrations match.</td></tr>';
+  }
+
+  async function loadOrgData() {
+    if (!REMOTE) { orgData = readRegs(); return { ok: true }; }
+    try {
+      const res = await apiGet({ action: 'list', pass: orgPassValue });
+      if (res.ok) orgData = res.items;
+      return res;
+    } catch (err) { return { ok: false, error: 'network' }; }
+  }
+  $('#orgForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const pass = $('#orgPass').value;
+    if (!REMOTE && pass !== ORG_PASS) { setError('orgPass', 'Incorrect passcode.'); return; }
+    orgPassValue = pass;
+    const btn = $('button[type=submit]', $('#orgForm'));
+    btn.disabled = true;
+    const res = await loadOrgData();
+    btn.disabled = false;
+    if (!res.ok) { setError('orgPass', res.error === 'network' ? 'Could not reach the server.' : 'Incorrect passcode.'); return; }
+    unlocked = true; setError('orgPass', '');
+    $('#orgLock').hidden = true; $('#orgPanel').hidden = false; $('#orgPass').value = '';
+    renderOrganiser();
+  });
+  $('#lockBtn').addEventListener('click', () => { unlocked = false; orgPassValue = ''; orgData = []; $('#orgPanel').hidden = true; $('#orgLock').hidden = false; });
+  $('#refreshBtn').addEventListener('click', async () => {
+    $('#refreshBtn').disabled = true;
+    const res = await loadOrgData();
+    $('#refreshBtn').disabled = false;
+    if (res.ok) renderOrganiser(); else $('#orgCount').textContent = 'Could not refresh. Check your connection.';
+  });
+  $('#orgSearch').addEventListener('input', renderOrganiser);
+  orgFilter.addEventListener('change', renderOrganiser);
+
+  function csvCell(v) {
+    let s = String(v == null ? '' : v);
+    if (/^[=+\-@\t\r]/.test(s)) s = "'" + s; // avoid spreadsheet formula injection
+    return '"' + s.replace(/"/g, '""') + '"';
+  }
+  $('#csvBtn').addEventListener('click', () => {
+    const list = filteredRegs();
+    const head = ['Registration ID', 'Name', 'Email', 'Contact', 'Department', 'Year', 'Event', 'Participation', 'Team name', 'Team members', 'Registered at'];
+    const lines = [head.map(csvCell).join(',')].concat(list.map((r) => {
+      const ev = getEvent(r.eventId);
+      return [r.id, r.name, r.email, r.phone, r.dept, r.year, ev ? ev.name : r.eventId, r.ptype, r.teamName,
+        r.members.map((m) => m.name + ' <' + m.email + '>').join('; '), r.createdAt].map(csvCell).join(',');
+    }));
+    const blob = new Blob(['\ufeff' + lines.join('\r\n')], { type: 'text/csv;charset=utf-8;' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'technova2026-registrations.csv';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  });
+  $('#resetBtn').addEventListener('click', () => {
+    if (!confirm('Reset all registrations to the demo data?')) return;
+    try { localStorage.removeItem(SEED_KEY); localStorage.removeItem(STORE_KEY); } catch (e) { /* ignore */ }
+    memory = { regs: [], seeded: false };
+    seedIfNeeded();
+    renderOrganiser();
+  });
+
+  /* ---------- Init ---------- */
+  if (REMOTE) {
+    $('#resetBtn').hidden = true;
+    $('#formNote').textContent = 'Your registration is saved to the TECHNOVA registration sheet.';
+  } else {
+    $('#orgHint').innerHTML = 'Demo passcode: <code>technova2026</code>';
+  }
+  seedIfNeeded();
+  renderEvents();
+  renderSchedule();
+  buildEventOptions();
+  onEventChange();
+})();
+
+</script>
+</body>
+</html>
