@@ -923,50 +923,71 @@ dialog::backdrop{background:rgba(0,0,0,.65)}
   });
 
   /* ---------- My Registrations ---------- */
-  function regCard(r) {
-    const ev = getEvent(r.eventId) || { name: r.eventId };
-    const rows = [
-      ['Name', r.name], ['Email', r.email], ['Contact', r.phone],
-      ['Department', r.dept], ['Year', r.year],
-      ['Participation', r.ptype === 'team' ? 'Team' : 'Individual']
-    ];
-    if (r.ptype === 'team') {
-      rows.push(['Team name', r.teamName]);
-      rows.push(['Members', [r.name + ' (leader)'].concat(r.members.map((m) => m.name + ' – ' + m.email)).join('; ')]);
-    }
-    rows.push(['Registered on', fmtDateTime(r.createdAt)]);
-    return '<article class="card reg-card"><h3><span>' + esc(ev.name) + '</span><code>' + esc(r.id) + '</code></h3><dl class="kv">' +
-      rows.map((x) => '<dt>' + esc(x[0]) + '</dt><dd>' + esc(x[1]) + '</dd>').join('') + '</dl></article>';
+  
+function regCard(r) {
+  const ev = getEvent(r.eventId) || { name: r.eventId };
+
+  const rows = [
+    ['Event', ev.name],
+    ['Participation', r.ptype === 'team' ? 'Team' : 'Individual'],
+    ['Registered on', fmtDateTime(r.createdAt)]
+  ];
+
+  return '<article class="card reg-card">' +
+    '<h3><span>Registration ID</span><code>' +
+    esc(r.id) +
+    '</code></h3><dl class="kv">' +
+    rows.map((x) =>
+      '<dt>' + esc(x[0]) + '</dt><dd>' + esc(x[1]) + '</dd>'
+    ).join('') +
+    '</dl></article>';
+}
+
+$('#lookupForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const q = $('#lookup').value.trim();
+  const out = $('#lookupResults');
+
+  if (!q) {
+    setError('lookup', 'Please enter your Registration ID.');
+    out.innerHTML = '';
+    return;
   }
 
-  $('#lookupForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const q = $('#lookup').value.trim();
-    const out = $('#lookupResults');
-    if (!q) { setError('lookup', 'Enter your email or registration ID.'); out.innerHTML = ''; return; }
-    const isEmail = q.includes('@');
-    if (isEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(q)) { setError('lookup', 'That email address does not look valid.'); out.innerHTML = ''; return; }
-    if (!isEmail && !/^TN26-[A-Z0-9]{6}$/i.test(q)) { setError('lookup', 'Registration IDs look like TN26-ABC123.'); out.innerHTML = ''; return; }
-    setError('lookup', '');
-    const key = q.toLowerCase();
-    let found;
-    if (REMOTE) {
-      out.innerHTML = '<p class="hint">Searching…</p>';
-      try {
-        const res = await apiGet({ action: 'lookup', q: q });
-        if (!res.ok) throw new Error('bad');
-        found = res.items;
-      } catch (err) {
-        out.innerHTML = '<p class="empty card">Could not reach the server. Please try again.</p>';
-        return;
-      }
-    } else {
-      found = readRegs().filter((r) => isEmail ? allEmails(r).includes(key) : r.id.toLowerCase() === key);
+  if (!/^TN26-[A-Z0-9]{6}$/i.test(q)) {
+    setError('lookup', 'Enter a valid Registration ID, for example TN26-ABC123.');
+    out.innerHTML = '';
+    return;
+  }
+
+  setError('lookup', '');
+  let found;
+
+  if (REMOTE) {
+    out.innerHTML = '<p class="hint">Searching...</p>';
+
+    try {
+      const res = await apiGet({ action: 'lookup', q: q });
+
+      if (!res.ok) throw new Error('Lookup failed');
+
+      found = res.items;
+    } catch (err) {
+      out.innerHTML = '<p class="empty card">Could not reach the server. Please try again.</p>';
+      return;
     }
-    out.innerHTML = found.length
-      ? '<p class="hint">' + found.length + ' registration(s) found.</p>' + found.map(regCard).join('')
-      : '<p class="empty card">No registration found for "' + esc(q) + '". Check the spelling or register above.</p>';
-  });
+  } else {
+    found = readRegs().filter((r) =>
+      String(r.id || '').toLowerCase() === q.toLowerCase()
+    );
+  }
+
+  out.innerHTML = found.length
+    ? '<p class="hint">' + found.length + ' registration(s) found.</p>' +
+      found.map(regCard).join('')
+    : '<p class="empty card">No registration found for ' + esc(q) + '.</p>';
+});
 
   /* ---------- Organiser ---------- */
   let unlocked = false;
